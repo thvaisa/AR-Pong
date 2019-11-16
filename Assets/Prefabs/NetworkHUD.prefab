@@ -612,7 +612,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4a882ad7187ae140852a53c26fa963a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manager: {fileID: 0}
+  manager: {fileID: 6594263524402925019, guid: cfceca512e742d6439e51d2ea21681a3, type: 3}
   status: {fileID: 2902472744039611166}
 --- !u!1 &2902472744039611160
 GameObject:
@@ -1276,7 +1276,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 108a52b5c131bbd44b8b0068a16a6cb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manager: {fileID: 0}
+  manager: {fileID: 6594263524402925019, guid: cfceca512e742d6439e51d2ea21681a3, type: 3}
   status: {fileID: 2902472744039611166}
   ipField: {fileID: 2902472743725897659}
 --- !u!1 &8568397235034129584
