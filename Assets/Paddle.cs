@@ -22,7 +22,7 @@ public class Paddle : MonoBehaviour
         float dT = Time.deltaTime;
         Vector3 position = this.transform.position;
 
-        if(position.z > -2 && speed < 0)
+        if(position.z > -6 && speed < 0)
         {
             position.z += speed* dT;
             this.transform.position = position;
@@ -30,7 +30,7 @@ public class Paddle : MonoBehaviour
 
         }
 
-        if (position.z < 10 && speed > 0) {
+        if (position.z < 5 && speed > 0) {
             position.z += speed * dT;
             this.transform.position = position;
         }
