@@ -41,6 +41,6 @@ public class ClientButton : MonoBehaviour {
         button.onClick.RemoveAllListeners();
         button.onClick.AddListener(Connect);
         text.text = "Connect";
-        status.text = "Not connected";
+        status.text = "Disconnecting...";
     }
 }

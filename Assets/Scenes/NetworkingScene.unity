@@ -1676,6 +1676,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manager: {fileID: 916348967}
+  status: {fileID: 2019387692}
 --- !u!114 &1968365820
 MonoBehaviour:
   m_ObjectHideFlags: 0

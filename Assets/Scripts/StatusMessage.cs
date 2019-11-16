@@ -21,5 +21,9 @@ public class StatusMessage : MonoBehaviour {
         if (NetworkClient.isConnected) {
             text.text = "Client connected: " + manager.networkAddress;
         }
+
+        if (!NetworkServer.active && !NetworkClient.active) {
+            text.text = "Welcome!";
+        }
     }
 }
