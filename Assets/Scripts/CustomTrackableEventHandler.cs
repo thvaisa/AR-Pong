@@ -9,6 +9,10 @@ public class CustomTrackableEventHandler : DefaultTrackableEventHandler {
         }
     }
 
+    private void FixedUpdate() {
+        Physics.gravity = -9.81f * transform.up;
+    }
+
     protected override void OnTrackingFound() {
         base.OnTrackingFound();
         foreach (Rigidbody body in transform.GetComponentsInChildren<Rigidbody>()) {
