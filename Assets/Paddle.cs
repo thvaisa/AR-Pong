@@ -36,12 +36,12 @@ public class Paddle : MonoBehaviour
  
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            speed = 0.4f;
+            speed = 0.3f;
         }
 
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            speed = -0.4f;
+            speed = -0.3f;
         }
 
     }

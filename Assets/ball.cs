@@ -12,14 +12,14 @@ public class ball : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         // rb.AddForce(transform.forward * 600);
-        rb.AddForce(new Vector3(200, 0, 600));
+        rb.AddForce(new Vector3(400, 0, Random.Range(50,100)));
     }
 
     // Update is called once per frame
     void Update()
     {
        
-        
+
     }
 
     void OnCollisionEnter(Collision collision)
@@ -27,7 +27,9 @@ public class ball : MonoBehaviour
         if(collision.gameObject.name == "zone")
         {
             rb.position = new Vector3(11,0,2);
-          // rb.AddForce(new Vector3(Random.Range(100, 100), 0, Random.Range(100, 100)));
+            rb.velocity = Vector3.zero;
+            rb.AddForce(new Vector3(400, 0, Random.Range(50, 100)));
+
 
         }
         //print(collision.gameObject.name);
