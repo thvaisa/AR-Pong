@@ -5,7 +5,10 @@ using UnityEngine;
 public class ball : MonoBehaviour
 {
 
-    public Rigidbody rb;
+    public AudioClip ballhitSound;
+    private Rigidbody rb;
+    private RespawnBoxes[] boxes;
+
 
     // Start is called before the first frame update
     void Start()
@@ -13,6 +16,7 @@ public class ball : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         // rb.AddForce(transform.forward * 600);
         rb.AddForce(new Vector3(400, 0, Random.Range(50,100)));
+        boxes = FindObjectsOfType<RespawnBoxes>();
     }
 
     // Update is called once per frame
@@ -24,12 +28,18 @@ public class ball : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.name == "zone")
+        GetComponent<AudioSource>().PlayOneShot(ballhitSound);
+
+        if (collision.gameObject.name == "zone")
         {
             rb.position = new Vector3(11,0,2);
             rb.velocity = Vector3.zero;
             rb.AddForce(new Vector3(400, 0, Random.Range(50, 100)));
-
+            Debug.Log(boxes.Length);
+            for(int i=0;i<boxes.Length;++i)
+            {
+                boxes[i].Reset();
+            }
 
         }
         //print(collision.gameObject.name);
