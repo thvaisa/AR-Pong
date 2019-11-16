@@ -36,8 +36,11 @@ public class ball : MonoBehaviour
             rb.velocity = Vector3.zero;
             rb.AddForce(new Vector3(400, 0, Random.Range(50, 100)));
             Debug.Log(boxes.Length);
-            boxes[0].Reset();
-            boxes[1].Reset();
+            for(int i=0;i<boxes.Length;++i)
+            {
+                boxes[i].Reset();
+            }
+
         }
         //print(collision.gameObject.name);
         //Rigidbody rb = collision.gameObject.GetComponent<Rigidbody>();
