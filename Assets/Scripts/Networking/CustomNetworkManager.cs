@@ -11,6 +11,8 @@ public class CustomNetworkManager : NetworkManager {
     private Transform leftPaddleSpawn;
     [SerializeField]
     private Transform rightPaddleSpawn;
+    [SerializeField]
+    private Transform ballSpawn;
     private GameObject ball;
     #endregion
 
@@ -24,7 +26,7 @@ public class CustomNetworkManager : NetworkManager {
         // spawn ball if two players
         if (numPlayers == 2)
         {
-            ball = Instantiate(spawnPrefabs.Find(prefab => prefab.name == "NetworkedBall"));
+            ball = Instantiate(spawnPrefabs.Find(prefab => prefab.name == "NetworkedBall"), ballSpawn.position, Quaternion.identity);
             NetworkServer.Spawn(ball);
         }
     }
