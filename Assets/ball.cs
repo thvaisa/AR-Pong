@@ -13,14 +13,17 @@ public class ball : NetworkBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        rb.isKinematic = isLocalPlayer;
-        rb.AddForce(new Vector3(400, 0, Random.Range(50,100)));
+        rb.isKinematic = isClient;
+        if (isServer)
+            rb.AddForce(new Vector3(400, 0, Random.Range(50,100)));
         boxes = FindObjectsOfType<RespawnBoxes>();
     }
 
     [ServerCallback]
     void OnCollisionEnter(Collision collision)
     {
+        if (isClient)
+            return;
         GetComponent<AudioSource>().PlayOneShot(ballhitSound);
 
         if (collision.gameObject.name == "zone")
