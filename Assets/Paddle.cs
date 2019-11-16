@@ -8,7 +8,7 @@ public class Paddle : MonoBehaviour
     public AudioClip hit;
     float speed = 0;
     float deceleration = 0.5f;
-    float maxSpeed = 10;
+    float maxSpeed = 20;
 
     // Start is called before the first frame update
     void Start()
