@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
 
-public class Paddle : MonoBehaviour
+public class Paddle : NetworkBehaviour
 {
     public AudioClip hit;
     float speed = 0;
@@ -32,6 +33,10 @@ public class Paddle : MonoBehaviour
         }
 
         speed = speed * deceleration;
+
+
+        if (!isLocalPlayer)
+            return;
 
         float touches = 0;
         foreach (Touch touch in Input.touches) {
