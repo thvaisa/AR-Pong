@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using Mirror;
+using System.Collections;
 
-public class ball : NetworkBehaviour
+
+public class ball : MonoBehaviour
 {
 
     public AudioClip ballhitSound;
@@ -13,8 +15,8 @@ public class ball : NetworkBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        rb.isKinematic = isClient;
-        if (isServer)
+        /*rb.isKinematic = isClient;
+        if (isServer)*/
             rb.AddForce(new Vector3(400, 0, Random.Range(50,100)));
         boxes = FindObjectsOfType<RespawnBoxes>();
     }
