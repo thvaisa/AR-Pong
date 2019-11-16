@@ -5,9 +5,14 @@ using Mirror;
 // spawning players. The built in RoundRobin spawn method wouldn't work after
 // someone reconnects (both players would be on the same side).
 public class CustomNetworkManager : NetworkManager {
-    public Transform leftPaddleSpawn;
-    public Transform rightPaddleSpawn;
-    // private GameObject ball;
+
+    #region Fields
+    [SerializeField]
+    private Transform leftPaddleSpawn;
+    [SerializeField]
+    private Transform rightPaddleSpawn;
+    private GameObject ball;
+    #endregion
 
     public override void OnServerAddPlayer(NetworkConnection conn)
     {
@@ -16,21 +21,19 @@ public class CustomNetworkManager : NetworkManager {
         GameObject player = Instantiate(playerPrefab, start.position, start.rotation);
         NetworkServer.AddPlayerForConnection(conn, player);
 
-        /*
         // spawn ball if two players
         if (numPlayers == 2)
         {
-            ball = Instantiate(spawnPrefabs.Find(prefab => prefab.name == "Ball"));
+            ball = Instantiate(spawnPrefabs.Find(prefab => prefab.name == "NetworkedBall"));
             NetworkServer.Spawn(ball);
         }
-        */
     }
 
     public override void OnServerDisconnect(NetworkConnection conn)
     {
         // destroy ball
-        // if (ball != null)
-            // NetworkServer.Destroy(ball);
+        if (ball != null)
+            NetworkServer.Destroy(ball);
 
         // call base functionality (actually destroys the player)
         base.OnServerDisconnect(conn);

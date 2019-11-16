@@ -1,12 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Mirror;
 
 
 public class Paddle : NetworkBehaviour
 {
     public AudioClip hit;
+    [SyncVar]
     float speed = 0;
     float deceleration = 0.5f;
     float maxSpeed = 20;

@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using Mirror;
 
-public class ball : MonoBehaviour
+public class ball : NetworkBehaviour
 {
 
     public AudioClip ballhitSound;
@@ -14,18 +13,12 @@ public class ball : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        // rb.AddForce(transform.forward * 600);
+        rb.isKinematic = isLocalPlayer;
         rb.AddForce(new Vector3(400, 0, Random.Range(50,100)));
         boxes = FindObjectsOfType<RespawnBoxes>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-       
-
-    }
-
+    [ServerCallback]
     void OnCollisionEnter(Collision collision)
     {
         GetComponent<AudioSource>().PlayOneShot(ballhitSound);
@@ -40,11 +33,6 @@ public class ball : MonoBehaviour
             {
                 boxes[i].Reset();
             }
-
         }
-        //print(collision.gameObject.name);
-        //Rigidbody rb = collision.gameObject.GetComponent<Rigidbody>();
-        //rb.AddForce(Vector3.left * 500); ;
-
     }
 }
