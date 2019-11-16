@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using Mirror;
 
-public class ball : MonoBehaviour
+public class ball : NetworkBehaviour
 {
 
     public AudioClip ballhitSound;
@@ -14,17 +13,13 @@ public class ball : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        // rb.AddForce(transform.forward * 600);
-        rb.AddForce(new Vector3(400, 0, Random.Range(50,100)));
+        rb.isKinematic = isClient;
+        if (isServer)
+            rb.AddForce(new Vector3(400, 0, Random.Range(50,100)));
         boxes = FindObjectsOfType<RespawnBoxes>();
     }
+ 
 
-    // Update is called once per frame
-    void Update()
-    {
-       
-
-    }
 
     void OnTriggerEnter(Collider collision)
     {
@@ -44,12 +39,32 @@ public class ball : MonoBehaviour
     }
 
     IEnumerator respawn()
-    {   
+    {
         yield return new WaitForSeconds(1);
         rb.position = new Vector3(11, 0, 2);
         rb.velocity = Vector3.zero;
-        rb.AddForce(new Vector3(Random.Range(400,600), 0, Random.Range(150, 250)));
-         
+        rb.AddForce(new Vector3(Random.Range(400, 600), 0, Random.Range(150, 250)));
 
     }
+     /*
+     [ServerCallback]
+    void OnCollisionEnter(Collision collision)
+    {
+        if (isClient)
+            return;
+        GetComponent<AudioSource>().PlayOneShot(ballhitSound);
+
+        if (collision.gameObject.name == "zone")
+        {
+            rb.position = new Vector3(11,0,2);
+            rb.velocity = Vector3.zero;
+            rb.AddForce(new Vector3(400, 0, Random.Range(50, 100)));
+            Debug.Log(boxes.Length);
+            for(int i=0;i<boxes.Length;++i)
+            {
+                boxes[i].Reset();
+            }
+        }
+     }
+     */
 }

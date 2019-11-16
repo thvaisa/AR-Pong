@@ -1,19 +1,18 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using Mirror;
 
 
-public class Paddle : MonoBehaviour
+public class Paddle : NetworkBehaviour
 {
     public AudioClip hit;
+    [SyncVar]
     float speed = 0;
     float deceleration = 0.5f;
     float maxSpeed = 20;
+    private int screenWidth;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
+    void Start() {
+        screenWidth = Screen.width;
     }
 
     // Update is called once per frame
@@ -22,6 +21,7 @@ public class Paddle : MonoBehaviour
         float dT = Time.deltaTime;
         Vector3 position = this.transform.position;
 
+ 
         if(position.z > -6 && speed < 0)
         {
             position.z += speed* dT;
@@ -33,9 +33,27 @@ public class Paddle : MonoBehaviour
         if (position.z < 5 && speed > 0) {
             position.z += speed * dT;
             this.transform.position = position;
+ 
         }
 
         speed = speed * deceleration;
+
+
+        if (!isLocalPlayer)
+            return;
+
+        float touches = 0;
+        foreach (Touch touch in Input.touches) {
+            float xpos = touch.position.x;
+            if (xpos < screenWidth / 2) {
+                touches++;
+            } else {
+                touches--;
+            }
+        }
+        if (touches != 0) {
+            speed = Mathf.Sign(touches) * maxSpeed;
+        }
 
         if (Input.GetKey(KeyCode.LeftArrow))
         {
