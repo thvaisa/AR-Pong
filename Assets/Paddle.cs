@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Paddle : MonoBehaviour
 {
-
+    public AudioClip hit;
     float speed = 0;
 
     // Start is called before the first frame update
@@ -48,6 +49,7 @@ public class Paddle : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
+        GetComponent<AudioSource>().PlayOneShot(hit);
         //print(collision.gameObject.name);
         //Rigidbody rb = collision.gameObject.GetComponent<Rigidbody>();
         //rb.AddForce(Vector3.left * 500); ;

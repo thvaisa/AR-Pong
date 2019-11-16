@@ -5,7 +5,8 @@ using UnityEngine;
 public class ball : MonoBehaviour
 {
 
-    public Rigidbody rb;
+    public AudioClip ballhitSound;
+    private Rigidbody rb;
 
     // Start is called before the first frame update
     void Start()
@@ -24,7 +25,9 @@ public class ball : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.name == "zone")
+        GetComponent<AudioSource>().PlayOneShot(ballhitSound);
+
+        if (collision.gameObject.name == "zone")
         {
             rb.position = new Vector3(11,0,2);
             rb.velocity = Vector3.zero;
