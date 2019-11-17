@@ -69,7 +69,7 @@ public class Paddle : NetworkBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        GetComponent<AudioSource>().PlayOneShot(hit);
+        //GetComponent<AudioSource>().PlayOneShot(hit);
         //print(collision.gameObject.name);
         //Rigidbody rb = collision.gameObject.GetComponent<Rigidbody>();
         //rb.AddForce(Vector3.left * 500); ;

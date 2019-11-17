@@ -10,6 +10,7 @@ public class Mascot : NetworkBehaviour {
     [ServerCallback]
     void OnTriggerEnter(Collider collision) {
         if (collision.gameObject.name == "floor") {
+            Debug.Log("Mscot hit game over");
             gameOver.gameObject.SetActive(true);
             if (gameObject.name == "chicken") {
                 gameOver.Find("Result").GetComponent<TextMeshProUGUI>().text = "The Pig WON!";
