@@ -31,13 +31,20 @@ public class CustomNetworkManager : NetworkManager {
         }
     }
 
-    public override void OnServerDisconnect(NetworkConnection conn)
+    public override void OnStopServer()
     {
         // destroy ball
-        if (ball != null)
-            NetworkServer.Destroy(ball);
+        // if (ball != null)
+        //     NetworkServer.Destroy(ball);
+
+        Debug.Log(GameObject.Find("World"));
+
+        foreach (NetworkTransform nt in FindObjectsOfType<NetworkTransform>()){
+            Debug.Log("zaheer");
+            NetworkServer.Destroy(nt.gameObject);
+        }
 
         // call base functionality (actually destroys the player)
-        base.OnServerDisconnect(conn);
+        base.OnStopServer();
     }
 }
