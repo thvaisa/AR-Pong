@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Mirror;
 
 // Custom NetworkManager that simply assigns the correct racket positions when
@@ -30,21 +31,10 @@ public class CustomNetworkManager : NetworkManager {
             NetworkServer.Spawn(ball);
         }
     }
-
     public override void OnStopServer()
     {
-        // destroy ball
-        // if (ball != null)
-        //     NetworkServer.Destroy(ball);
-
-        Debug.Log(GameObject.Find("World"));
-
-        foreach (NetworkTransform nt in FindObjectsOfType<NetworkTransform>()){
-            Debug.Log("zaheer");
-            NetworkServer.Destroy(nt.gameObject);
-        }
-
         // call base functionality (actually destroys the player)
         base.OnStopServer();
+        SceneManager.LoadScene("ServerScene");
     }
 }

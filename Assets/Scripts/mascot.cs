@@ -1,42 +1,21 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using Mirror;
+using TMPro;
 
+public class Mascot : NetworkBehaviour {
 
-
-public class mascot : MonoBehaviour
-{
-
+    [SerializeField]
+    private RectTransform gameOver;
  
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    void OnTriggerEnter(Collider collision)
-    {
- 
-        //if (collision.gameObject.name == "floor")
-        //{
-        //   if (gameObject.name == "chicken")
-        //    {
-        //        score.text = "The Pig WON!";
-        //    }
-        //    else
-        //    {
-        //        score.text = "Angry ChickenWON!";
-
-        //    }
-
-        //}
-   
-
+    [ServerCallback]
+    void OnTriggerEnter(Collider collision) {
+        if (collision.gameObject.name == "floor") {
+            gameOver.gameObject.SetActive(true);
+            if (gameObject.name == "chicken") {
+                gameOver.Find("Result").GetComponent<TextMeshProUGUI>().text = "The Pig WON!";
+            } else {
+                gameOver.Find("Result").GetComponent<TextMeshProUGUI>().text = "The Chicken WON!";
+            }
+        }
     }
 }
